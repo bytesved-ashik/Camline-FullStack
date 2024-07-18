@@ -1,0 +1,43 @@
+name: deploy_dev
+
+# This workflow will trigger on pushes to the development branch
+on:
+  push:
+    branches:
+      - development
+
+jobs:
+  manual_deploy:
+    runs-on: camline-dev
+    steps:
+      # Check out the code
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
+      # Setup Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v2.5.1
+        with:
+          node-version: '18.14.2'
+
+      - name: Verify Node.js version
+        run: node --version
+      
+      # Pull the latest code and install dependencies
+      - name: Update repository and install dependencies
+        run: |
+          cd /home/node/camline-therapy-api
+          git pull origin development
+          npm install
+      
+      # Build the project
+      - name: Build
+        run: |
+          cd /home/node/camline-therapy-api
+          npm run build
+      
+      # Restart the PM2 process
+      - name: Restart PM2 process
+        run: |
+          export PM2_HOME="/root/.pm2"
+          pm2 restart camline-dev

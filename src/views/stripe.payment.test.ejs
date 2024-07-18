@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= data.title %></title>
+</head>
+<body>
+  <h1><%= data.message %></h1>
+
+  <!-- <button id="pay">Pay $10.00</button> -->
+  <button id="confirmPayment">Confirm Payment</button>
+
+  <div id="error-message"></div>
+
+  <div id="card">
+    <div id="card-element"></div>
+  </div>
+
+
+  <script src="https://js.stripe.com/v3/"></script>
+  <script>
+    // test
+    // const stripe = Stripe('pk_test_51Oc7BZKBVPKp4Iz5BOLmH2kZMG72T1IEgFjxL0KNZm0qk6a5QTNPCIXpJnZ80jGo29ric0m0ooP5RxFvJBrwQfF700Rkuyl9or');
+
+    // live
+    // const stripe = Stripe('pk_live_51Oc7BZKBVPKp4Iz55vkRenYS7cg7kxGa8n02bwwA977QXqdAjWKsB6GEbAG4pgwHIoBmnOzQCMkvavMq3txTfAjJ00TqvQcAEH');
+    const stripe = Stripe('pk_test_SduD62qK4WLwZv431BgG6RdT00xJhyeOac');
+
+    const elements = stripe.elements();
+
+    const cardElement = elements.create('card');
+    cardElement.mount('#card-element'); 
+
+    var parsed_data = <%- JSON.stringify(data) %> 
+    console.log('parsed_data : ', parsed_data);
+
+    const confirmPaymentButton = document.getElementById('confirmPayment');
+    confirmPaymentButton.addEventListener('click', async () => {
+        console.log('click event')
+        const clientSecret = parsed_data.clientSecret;
+        const result = await stripe.confirmCardPayment(clientSecret, {
+            payment_method: {
+                // card: elements.create('card'),
+                card: cardElement
+            },
+        });
+
+        console.log('result : ', result);
+
+        if (result.error) {
+            // Handle errors (e.g., card authentication failed)
+            console.error('error : ', result.error.message);
+        } else {
+            // Payment succeeded, result.paymentIntent contains the Payment Intent
+            console.log('Payment succeeded:', result.paymentIntent);
+        }
+    });
+  </script>
+</body>
+</html>

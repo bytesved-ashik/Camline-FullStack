@@ -1,0 +1,127 @@
+<html lang='en'>
+
+<head>
+  <meta charset='UTF-8' />
+  <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+  <title>Document</title>
+  <style>
+    body {
+      font-family: Inter, Helvetica, "Apple Color Emoji", "Segoe UI
+ Emoji", NotoColorEmoji, " Noto Color Emoji", " Segoe UI Symbol", " Android Emoji", EmojiSymbols, -apple-system, system-ui, " Segoe UI", Roboto,
+ "Helvetica Neue", "Noto Sans", sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    .container {
+      max-width: 650px;
+      margin: 100px auto;
+      padding: 20px;
+      background-color:
+        #ffffff;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      border-radius: 5px;
+    }
+
+    .header {
+      text-align: center;
+      padding: 10px 0;
+      border-radius: 5px 5px 0 0;
+    }
+
+    .logo {
+      color: #fff;
+      text-align: center;
+      padding: 20px 0;
+      border-radius:
+        5px 5px 0 0;
+    }
+
+    .header h1 {
+      padding-top: 15px;
+      margin: 0;
+      font-size: 23px;
+    }
+
+    .content p {
+      font-size: 18px;
+      margin-bottom: 10px;
+      line-height: 1.6;
+    }
+
+    .button {
+      padding: 30px 0 30px 0;
+      text-align: center;
+      margin: 0%;
+    }
+
+    .btn {
+      background: #5e5df0;
+      border-radius: 999px;
+      box-shadow: #5e5df0 0 10px 20px -10px;
+      box-sizing: border-box;
+      color: #ffffff;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 24px;
+      opacity: 1;
+      outline: 0 solid transparent;
+      padding: 10px 20px;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+      width: fit-content;
+      word-break: break-word;
+      border: 0;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .otp-box {
+      background-color: #f0f0f0;
+      padding: 10px;
+      border-radius: 5px;
+      display: inline-block;
+    }
+
+    #otp {
+      font-size: 20px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .container {
+        max-width: 100%;
+        margin: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class='container'>
+    <div class='logo'>
+      <img src='https://api.24hrtherapy.co.uk/storage/logo.png' alt='logo' srcset='' />
+    </div>
+    <div class='header'>
+      <h1>Activate 2 - Step Verification</h1>
+    </div>
+    <div class='content'>
+      <p>Hello {{name}},</p>
+    </div>
+    <div class='content'>
+      <p>We've sent you an e-mail so you can start activating 2-Step Verification for your account.</p>
+      <p>Here is your 2-Step Verification OTP : <span id="otp">{{token}}</span></p>
+      <div class='button'>
+        <a class="btn" href="https://24hrtherapy.co.uk/auth/login" role="button">Verify</a>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
